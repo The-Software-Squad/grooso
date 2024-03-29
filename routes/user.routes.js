@@ -1,9 +1,10 @@
 const express = require('express');
+const handleNewUser = require('../controllers/user/register.controller');
 const router = express.Router();
 
 router.route('/')
     .get() //login
-    .post() //register
+    .post(handleNewUser) //register
     .put() //edit data
 
 router.route("/:id")

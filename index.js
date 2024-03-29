@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const todoRouter = require('./routes/todo.routes');
+const userRouter = require('./routes/user.routes')
 const connectDb = require('./db/mongoDb');
 
 app.use(express.urlencoded({ extended: false }));
@@ -15,6 +16,7 @@ app.use(cors());
 
 //this is for router
 app.use("/todo", todoRouter);
+app.use('/user',userRouter);
 
 
 app.get('/', (req, res) => {

@@ -1,23 +1,29 @@
-const bcrypt = require('bcrypt');
+const userModel = require('../../models/user.model');
+const { createHashedPassword, checkHashedPassword } = require('../../utils/bcrypt');
 
-const handleNewUser = async(req,res) => {
-    const { user, pwd } = req.body;
-    if(!user || !pwd) return res.status(400).json({ 'message':  'username and password required.'})
-    //get data from db
+const handleNewUser = async (req, res) => {
+    const { user, pwd, phoneNumber, email } = req.body;
+    if (!user || !pwd || !phoneNumber || !email) return res.status(400).json({ 'error': 'username,phoneNumber and password required.' })
 
-    //check for duplicate in the db
-    //checking if duplicate available
-    if(duplicate) return res.sendStatus(409); //conflict
-    try{
+    try {
+        const alreadyUser = await userModel.findOne({ "name": user, "phoneNumber": phoneNumber });
+        console.log(alreadyUser);
+        if (alreadyUser) return res.send(409).send({ "message": 'user is already exist .' }); //conflict
         //encrypt the password with bcrypt
-        const hashedPwd = await bcrypt.hash(pwd, 10);
-        //store the new user
-        const newUser = { 'username': user , 'password': hashedPwd};
-        //send this to mongodb
-        //send response 
-    }catch(error){
-        res.status(500).json({'message':error.message})
+        const hashedPassword = await createHashedPassword(pwd);
+        console.log('hasedpwd', hashedPassword);
+        const newUser = new userModel({
+            'name': user,
+            'password': hashedPassword,
+            "email": email,
+            "phoneNumber": phoneNumber
+        });
+
+        const savedNewUser = await newUser.save();
+        res.status(200).send(savedNewUser);
+    } catch (error) {
+        res.status(500).json({ 'message': error.message })
     }
 }
 
-module.exports = handleNewUser ;
+module.exports = handleNewUser;
