@@ -15,7 +15,6 @@ const updateContoller = async (req, res) => {
 
     try {
         const updateData = await TodoModel.findOneAndUpdate({ "_id": id }, update);
-        console.log(updateData)
         if (updateData) {
             res.status(200).json({
                 "status": 200,
