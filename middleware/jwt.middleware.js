@@ -16,11 +16,13 @@ const refreshTokenGenerator = (userName) => {
     const refreshToken = jwt.sign({
         "user": userName
     },
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '30s' });
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: '1d' });
 
         return refreshToken ;
-} 
+}
+
+
 
 
 module.exports = {
