@@ -9,12 +9,10 @@ const readController = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(401).send({
+       return res.status(401).send({
             "message": 'error fetching data',
             'status' : 401
         })
-        throw error ;
-
     }
 
 }

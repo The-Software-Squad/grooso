@@ -2,6 +2,7 @@ const userModel = require('../../models/user.model');
 const { createHashedPassword, checkHashedPassword } = require('../../utils/bcrypt');
 
 const handleNewUser = async (req, res) => {
+    console.log(req.body)
     const { user, pwd, phoneNumber, email } = req.body;
     if (!user || !pwd || !phoneNumber || !email) return res.status(400).json({ 'error': 'username,phoneNumber and password required.' })
 

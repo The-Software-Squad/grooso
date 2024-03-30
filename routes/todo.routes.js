@@ -5,6 +5,9 @@ const readController = require('../controllers/todo/read.controller.js');
 const deleteContoller = require("../controllers/todo/delete.controller.js");
 const updateContoller = require('../controllers/todo/update.controller.js');
 
+const verifyJwt = require('../middleware/verifyJWT.middleware.js');
+
+router.use(verifyJwt);
 router.route('/')
     .get(readController)
     .post(createController)
