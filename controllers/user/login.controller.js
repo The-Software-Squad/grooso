@@ -19,8 +19,8 @@ const loginUser = async (req,res) => {
         //if password is correct
         if (checkPassword) {
             //generate refresh token and access token
-            const refreshToken = refreshTokenGenerator(userData.name);
-            const accessToken = accessTokenGenerator(userData.name);
+            const refreshToken = refreshTokenGenerator(userData.name, userData.role);
+            const accessToken = accessTokenGenerator(userData.name, userData.role);
             //testing if refresh token available
             //send the refresh token to data base. 
             const updatedData = await userModel.findByIdAndUpdate({ "_id": userData._id }, { "refreshToken": refreshToken });

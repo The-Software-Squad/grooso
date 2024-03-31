@@ -7,9 +7,13 @@ const updateContoller = require('../controllers/todo/update.controller.js');
 
 const verifyJwt = require('../middleware/verifyJWT.middleware.js');
 
+//roles auth
+
+const rolesAuth = require('../middleware/rolesAuth.middleware.js');
+
 router.use(verifyJwt);
 router.route('/')
-    .get(readController)
+    .get(rolesAuth(['user']),readController)
     .post(createController)
 
 router.route("/:id")

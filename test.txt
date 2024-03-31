@@ -1,0 +1,13 @@
+a user came and logged in 
+sent roles with jwt in cookies to the frontend
+
+authorization
+
+first get the jwt verify if currently its valid or not ;
+if not send forbidden;
+
+now if its valid decode it . get the roles
+
+isUser
+isSuperAdmin
+isAdmin

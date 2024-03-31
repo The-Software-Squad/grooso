@@ -12,6 +12,7 @@ const verifyJwt = (req, res, next) => {
         (err, decoded) => {
             if(err) return res.sendStatus( 403 ) ;//invalid token
             req.user = decoded.user;
+            req.role = decoded.role;
             next();
         }
     )

@@ -22,7 +22,7 @@ const RefreshTokenController = async (req, res) => {
         if(!checkJwt){
            return res.sendStatus(403);
         }
-        const accessToken = accessTokenGenerator(userData.name)
+        const accessToken = accessTokenGenerator(userData.name, userData.role)
         return res.status(200).json({ accessToken });
         
     } catch (error) {
